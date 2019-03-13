@@ -1,0 +1,11 @@
+@import "variables";
+@import "bootstrap/config";
+
+body {
+  padding-top: 70px;
+}
+
+h1 {
+  color: $primary;
+  font-size: 48px;
+}

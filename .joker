@@ -1,0 +1,4 @@
+{
+  :known-macros [devcards.core/defcard]
+  :ignored-unused-namespaces [bamse.bmi-calculator bamse.user-add]
+}

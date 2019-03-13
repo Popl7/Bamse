@@ -1,0 +1,55 @@
+{
+  "name": "bamse",
+  "version": "1.0.0",
+  "description": "Universal Re-frame setup running on Node.js",
+  "keywords": [
+    "clojurescript",
+    "reagent",
+    "re-frame",
+    "universal",
+    "ssr"
+  ],
+  "author": "Steven Thonus",
+  "license": "WTFPL",
+  "main": "dist/server/server.js",
+  "scripts": {
+    "clean": "rm -rf resources/server && rm -rf resources/package*.json && rm -rf resources/public/js && rm -rf resources/public/css",
+    "dev": "nf start",
+    "node-sass": "node-sass",
+    "nf": "nf",
+    "prod": "cd resources && node server/server.js",
+    "release": "npm run clean && cp package*.json resources && npm run sass-prod && shadow-cljs release client server",
+    "sass-dev": "node-sass --recursive --output resources/public/css --output-style expanded --source-map true --include-path node_modules/bootstrap/scss src/sass",
+    "sass": "npm run sass-dev && node-sass --watch --recursive --output resources/public/css --output-style expanded --source-map true --include-path node_modules/bootstrap/scss src/sass",
+    "sass-prod": "node-sass --recursive --output resources/public/css --output-style compressed --include-path node_modules/bootstrap/scss src/sass",
+    "server": "cd resources && PORT=3000 node server/server.js",
+    "watch": "shadow-cljs watch client devcards server"
+  },
+  "repository": {
+    "url": "https://gitlab.com/StevenT/bamse.git"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "colors": "^1.3.3",
+    "cors": "^2.8.5",
+    "create-react-class": "^15.6.3",
+    "express": "^4.16.4",
+    "markdown-it": "^8.4.2",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-flip-move": "^3.0.3",
+    "react-highlight.js": "^1.0.7",
+    "sqlite3": "^4.0.6",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "bootstrap": "^4.3.1",
+    "connect-slow": "^0.4.0",
+    "foreman": "^3.0.1",
+    "node-sass": "^4.11.0",
+    "shadow-cljs": "^2.8.15",
+    "showdown": "^1.9.0",
+    "source-map-support": "^0.5.10",
+    "ws": "^6.2.0"
+  }
+}

@@ -1,0 +1,66 @@
+#
+# .gitlab-ci.yml reference: https://docs.gitlab.com/ee/ci/yaml/
+#
+################################################################################################
+
+cache:
+  key: "shadow-cljs"
+  paths:
+    - .shadow-cljs
+
+################################################################################################
+
+stages:
+  - build
+  - deploy
+
+################################################################################################
+
+build:
+  stage: build
+  image: theasp/clojurescript-nodejs:latest
+  artifacts:
+    expire_in: 1 week
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHA"
+    paths:
+      - resources
+  before_script:
+    - node --version
+    - npm --version
+    - npm ci
+  script:
+    - npm run release
+
+################################################################################################
+
+deploy:
+  stage: deploy
+  image: unrealistic/ubuntu-opensshclient-rsync
+  environment:
+    name: demo
+    url: https://bamse.ln2.nl
+  before_script:
+    # add ssh private key
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    # add ssh host key
+    - echo "$SSH_HOST_KEY" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    # add git version info
+    - GIT_DATE=$(date '+%Y-%m-%d %H:%M')
+    - sed -i -e "s@MY_GIT_BRANCH@$CI_COMMIT_REF_NAME@"  resources/public/VERSION.txt
+    - sed -i -e "s@MY_GIT_SHA@$CI_COMMIT_SHA@"          resources/public/VERSION.txt
+    - sed -i -e "s@MY_GIT_DATE@$GIT_DATE@"              resources/public/VERSION.txt
+    # upload to server
+    - cp package*.json resources/
+    - rm resources/public/index.html
+    - rsync -hrvz --delete --exclude=node_modules -e ssh resources/ ${SSH_USER}@${SSH_SERVER}:~/bamse/
+    # install node_modules
+    - ssh $SSH_USER@$SSH_SERVER 'cd bamse && /usr/bin/npm ci --only-production'
+    # restart server
+    - ssh $SSH_USER@$SSH_SERVER '/usr/bin/pm2 restart bamse'
+
+################################################################################################

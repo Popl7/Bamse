@@ -1,0 +1,13 @@
+/node_modules/
+*.jar
+.nrepl-port
+npm-debug.log
+/resources/package*.json
+/resources/public/js
+/resources/public/css
+/resources/server
+.DS_Store
+.shadow-cljs
+.idea
+target
+.cpcache
