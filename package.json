@@ -14,7 +14,7 @@
   "main": "dist/server/server.js",
   "scripts": {
     "clean": "rm -rf resources/server && rm -rf resources/package*.json && rm -rf resources/public/js && rm -rf resources/public/css",
-    "dev": "nf start",
+    "dev": "npm run nf -- start",
     "node-sass": "node-sass",
     "nf": "nf",
     "prod": "cd resources && node server/server.js",
@@ -47,6 +47,7 @@
     "connect-slow": "^0.4.0",
     "foreman": "^3.0.1",
     "node-sass": "^4.11.0",
+    "nodemon": "^1.18.10",
     "shadow-cljs": "^2.8.15",
     "showdown": "^1.9.0",
     "source-map-support": "^0.5.10",

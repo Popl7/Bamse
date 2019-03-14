@@ -24,7 +24,7 @@ Work in progress :-)
 
 And after compile run:
 
-`nf start`
+`npm run dev`
 
 #### App
 [http://localhost:3000](http://localhost:3000)
