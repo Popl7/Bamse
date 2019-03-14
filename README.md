@@ -12,7 +12,7 @@ Work in progress :-)
 * [bidi](https://github.com/juxt/bidi)
 * [pushy](https://github.com/kibu-australia/pushy)
 * [devtools](https://github.com/binaryage/cljs-devtools)
-* redux time travelling (part of this project :-))
+* [redux time travelling](https://gitlab.com/StevenT/redux-frame-devtools)
 
 ## Demo
 [https://bamse.ln2.nl](https://bamse.ln2.nl)
