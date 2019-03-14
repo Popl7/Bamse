@@ -1,6 +1,7 @@
 (ns bamse.events
   (:require
    [re-frame.core :as re-frame]
+   [re-frame-redux.core :as redux]
    [bamse.config :as config]
    [bamse.db :as db]
    [bamse.users.events]
@@ -9,6 +10,7 @@
 (defn register []
 
  (bamse.users.events/register)
+ (redux/register-redux-events :bamse.db/db)
 
  (reg-event-db
   ::initialize-db

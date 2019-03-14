@@ -7,7 +7,8 @@
                 "src-devcards"
                 "src-server"]
 
- :dependencies [[reagent "0.8.1"]
+ :dependencies [[org.clojure/clojurescript "1.10.520"]
+                [reagent "0.8.1"]
                 [re-frame "0.10.6"]
                 [binaryage/devtools "0.9.10"]
                 [day8.re-frame/http-fx "0.1.6"]
@@ -17,7 +18,8 @@
                 [com.cemerick/url "0.1.1"]
                 [devcards "0.2.5"] ;; pinned to 0.2.5 to prevent cljsjs.marked error
                 [cider/cider-nrepl "0.21.1"] ;; for VS Code - Calva repl
-                [proto-repl "0.3.1"]] ;; for Atom - Proto repl
+                [proto-repl "0.3.1"] ;; for Atom - Proto repl
+                [org.clojars.unrealistic/re-frame-redux "0.1.0-SNAPSHOT"]]
 
  :nrepl {:port 3333}
 

@@ -5,7 +5,7 @@
             [ajax.core :as ajax]
             [cemerick.url :refer [url url-encode]]
             [bamse.config :as config]
-            [bamse.redux :refer [redux-debug]]))
+            [re-frame-redux.core :as redux :refer [redux-debug]]))
 
 ;; Views
 (defn spinner []
@@ -48,17 +48,6 @@
 
 (def check-spec-interceptor (re-frame/after (partial check-and-throw :bamse.db/db)))
 
-(def ignored-events [:ticker/tick])
-
-(def bm-debug
-  (re-frame.core/->interceptor
-   :id      :bm-debug
-   :before  (fn [context]
-              (let [[name args] (get-in context [:coeffects :event])]
-                (when (not-any? #(= % name) ignored-events)
-                  (println "[Event] " name args)))
-              context)))
-
 (def ssr-waits
   (re-frame.core/->interceptor
    :id      :ssr-waits
@@ -82,8 +71,7 @@
 (def standard-interceptors-db
   [(when (and config/bm-debug?
               config/client?)
-     ; re-frame.core/debug
-     bm-debug)
+     re-frame.core/debug)
    (when config/redux? redux-debug)
    check-spec-interceptor
    ssr-waits])
@@ -91,8 +79,7 @@
 (def standard-interceptors-fx
   [(when (and config/bm-debug?
               config/client?)
-     ; re-frame.core/debug
-     bm-debug)
+     re-frame.core/debug)
    (when config/redux? redux-debug)
    check-spec-interceptor
    ssr-waits])
@@ -100,6 +87,9 @@
 
 ;; Custom registrations
 ;;
+; (def reg-event-db redux/reg-event-db)
+; (def reg-event-fx redux/reg-event-fx)
+
 (defn reg-event-db
   ([id handler-fn]
    (re-frame/reg-event-db id

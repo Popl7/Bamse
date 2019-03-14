@@ -2,7 +2,7 @@
   (:require [re-frame.core :as re-frame]
             [bamse.config :as config]
             [bamse.events :as events]
-            [bamse.redux  :as redux]
+            [re-frame-redux.core :as redux]
             [bamse.subs   :as subs]
             [bamse.views  :as views]))
 

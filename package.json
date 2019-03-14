@@ -10,7 +10,7 @@
     "ssr"
   ],
   "author": "Steven Thonus",
-  "license": "WTFPL",
+  "license": "MIT",
   "main": "dist/server/server.js",
   "scripts": {
     "clean": "rm -rf resources/server && rm -rf resources/package*.json && rm -rf resources/public/js && rm -rf resources/public/css",
