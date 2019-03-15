@@ -35,6 +35,18 @@ And after compile run:
 #### Shadow-Cljs dashboard
 [http://localhost:9630](http://localhost:9630)
 
+### Repl
+#### Calva
+Connect to repl on localhost port 3333 and choose target, e.g. client or server
+#### Proto Repl
+Connect to repl on port 3333 and choose target with command
+
+`(shadow.cljs.devtools.api/nrepl-select :client)`
+
+or
+
+`(shadow.cljs.devtools.api/nrepl-select :server)`
+
 ## Production mode
 ### building
 `npm ci`
