@@ -17,11 +17,18 @@
 (def body-parser (nodejs/require "body-parser"))
 (def slow (nodejs/require "connect-slow"))
 (def colors (nodejs/require "colors/safe"))
+(def cookie-parser (nodejs/require "cookie-parser"))
 
 (defn handle-request [req res]
   (let [ch (chan)
         full-url (str req.protocol "://" req.headers.host req.originalUrl)
-        render-chan (render/render-page ch full-url (.-path req))]
+        lang (or (-> req
+                     (.-cookies)
+                     (js->clj :keywordize-keys true)
+                     :language
+                     keyword)
+                 :nl)
+        render-chan (render/render-page ch full-url (.-path req) lang)]
     (go
       (.send res (<! render-chan)))))
 
@@ -43,6 +50,9 @@
    ;; parse JSON body
   (.use app (.urlencoded body-parser #js {:extended true}))
   (.use app (.json body-parser))
+
+  ;; parse cookies
+  (.use app (cookie-parser))
 
    ;; on development, slow down api server
   (when config/debug?

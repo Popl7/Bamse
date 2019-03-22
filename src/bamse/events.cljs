@@ -17,10 +17,16 @@
   (fn [_ _]
     db/default-db))
 
- (reg-event-db
-  ::set-db
-  (fn [_ [_ new-db]]
-    new-db))
+  (reg-event-db
+   ::set-db
+   (fn [_ [_ new-db]]
+     new-db))
+
+  (reg-event-fx
+   ::set-language
+   (fn [{:keys [:db]} [_ lang]]
+     {:db (assoc db :language lang)
+      :set-cookie ["language" lang]}))
 
  (re-frame/reg-fx
   :dispatch-multiple

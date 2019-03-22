@@ -1,0 +1,21 @@
+#: src/bamse/views.cljs
+msgid "Translation test"
+msgstr ""
+
+#: src/bamse/views.cljs
+msgid "Greetings"
+msgstr ""
+
+#: src/bamse/views.cljs
+msgid "Please confirm your email"
+msgstr ""
+
+#: src/bamse/views.cljs
+msgid "Welcome, %s!"
+msgstr ""
+
+#: src/bamse/views.cljs
+msgid "product"
+msgid_plural "%s products"
+msgstr[0] ""
+msgstr[1] ""

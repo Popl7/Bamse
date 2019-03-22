@@ -3,6 +3,7 @@
             [reagent.core :as reagent]
             [cljs.reader]
             [re-frame.core :as re-frame]
+            [goog.net.cookies]
             [pushy.core :as pushy]
             [bamse.core :as core]
             [bamse.config :as config]
@@ -14,13 +15,21 @@
 (def history
  (pushy/pushy routes/dispatch-route routes/parse-url))
 
-(defn set-pushstate [path]
+(defn set-pushstate! [path]
  (pushy/set-token! history path))
 
 (re-frame/reg-fx
  :navigate-to
  (fn [path]
-  (set-pushstate path)))
+   (set-pushstate! path)))
+
+(defn set-cookie! [k v]
+  (.set goog.net.cookies k v))
+
+(re-frame/reg-fx
+ :set-cookie
+ (fn [[key value]]
+  (set-cookie! key (name value))))
 
 
 ;; client rendering
@@ -30,8 +39,6 @@
       (cljs.reader/read-string)))
 
 (defn render [& [hydrate]]
-  ;; Same as render(), but is used to hydrate a container whose HTML contents were rendered by ReactDOMServer.
-  ;; React will attempt to attach event listeners to the existing markup.
  (if hydrate
    (react-dom/hydrate (reagent/as-element [core/app-view]) (.getElementById js/document "app"))
    (reagent/render [core/app-view] (.getElementById js/document "app"))))
