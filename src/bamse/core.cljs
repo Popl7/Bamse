@@ -1,5 +1,6 @@
 (ns bamse.core
   (:require [re-frame.core :as re-frame]
+            [re-frame.loggers :as rf.log]
             [bamse.config :as config]
             [bamse.events :as events]
             [re-frame-redux.core :as redux]

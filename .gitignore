@@ -11,3 +11,4 @@ npm-debug.log
 .idea
 target
 .cpcache
+.lein-repl-history

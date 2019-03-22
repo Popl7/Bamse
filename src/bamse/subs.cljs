@@ -22,6 +22,11 @@
   (fn [db _]
     (:active-route db)))
 
+  (re-frame/reg-sub
+  ::language
+  (fn [db _]
+    (:language db)))
+
  (re-frame/reg-sub
   ::active-route-id
   :<- [::active-route]

@@ -4,10 +4,18 @@
             [re-frame.core :as re-frame]
             [bamse.core :as core]
             [bamse.config :as config]
+            [bamse.events :as events]
             [bamse.routes :as routes]
             [bamse.subs :as subs]
             [cljs.core.async :refer [chan >! <! close! timeout]])
   (:require-macros [cljs.core.async.macros :refer [go go-loop alt!]]))
+
+
+(defn register-events []
+  (re-frame/reg-fx
+   :set-cookie
+   (fn [[key value]])))
+
 
 (def colors (nodejs/require "colors/safe"))
 
@@ -77,9 +85,9 @@
 (defn renderit [url]
   (let [db (re-frame/subscribe [::subs/db])]
     (str "<!DOCTYPE html>"
-         (r/render-to-static-markup[template {:url   url
-                                              :body  core/app-view
-                                              :state @db}]))))
+         (r/render-to-string[template {:url   url
+                                       :body  core/app-view
+                                       :state @db}]))))
 
 (defn done-rendering [render-chan]
   (let [waits  (re-frame/subscribe [::subs/ssr-waits])
@@ -93,9 +101,11 @@
           (recur))))))
 
 
-(defn ^:export render-page [ch url path]
+(defn ^:export render-page [ch url path lang]
   (println "------- new request ------------------")
   (core/init)
+  (register-events)
+  (re-frame/dispatch [::events/set-language lang])
   (routes/navigate-to path)
 
   (let [render-chan  (chan)

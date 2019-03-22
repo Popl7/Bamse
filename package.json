@@ -31,6 +31,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "colors": "^1.3.3",
+    "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "create-react-class": "^15.6.3",
     "express": "^4.16.4",

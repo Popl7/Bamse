@@ -2,7 +2,8 @@
 
  :log {:level :info}
 
- :source-paths ["src"
+ :source-paths ["resources/gettext"
+                "src"
                 "src-client"
                 "src-devcards"
                 "src-server"]
@@ -33,7 +34,8 @@
                    :dev {:compiler-options {:closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}}
                          :devtools {:after-load bamse.client/reload
                                     :preloads   [devtools.preload
-                                                 day8.re-frame-10x.preload]}}
+                                                 ;; day8.re-frame-10x.preload
+                                                 ]}}
 
                    :release {:compiler-options {:optimizations :advanced}}}
 

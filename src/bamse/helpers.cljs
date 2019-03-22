@@ -3,9 +3,23 @@
             [cljs.spec.alpha :as s]
             [day8.re-frame.http-fx :as http-fx]
             [ajax.core :as ajax]
+            [goog.string :as gstring]
+            [goog.string.format]
             [cemerick.url :refer [url url-encode]]
             [bamse.config :as config]
             [re-frame-redux.core :as redux :refer [redux-debug]]))
+
+;; Translations
+(defn tr [lang s & args]
+  (let [string (or (get-in config/dictionary [lang s]) s)]
+    (apply gstring/format string args)))
+
+(defn trn [lang strings count & args]
+  (let [[singular plural] (or (get-in config/dictionary [lang strings]) strings)]
+    (if (= 1 count)
+      (apply gstring/format singular (conj args count))
+      (apply gstring/format plural   (conj args count)))))
+
 
 ;; Views
 (defn spinner []
@@ -71,7 +85,8 @@
 (def standard-interceptors-db
   [(when (and config/bm-debug?
               config/client?)
-     re-frame.core/debug)
+     ;; re-frame.core/debug
+     )
    (when config/redux? redux-debug)
    check-spec-interceptor
    ssr-waits])
@@ -79,7 +94,8 @@
 (def standard-interceptors-fx
   [(when (and config/bm-debug?
               config/client?)
-     re-frame.core/debug)
+     ;; re-frame.core/debug
+     )
    (when config/redux? redux-debug)
    check-spec-interceptor
    ssr-waits])
