@@ -9,7 +9,7 @@
 
 (defn dev-setup []
   (when config/debug?
-    (println "[App] running in development mode")
+    (println "[App] Running in development mode")
     (when config/client?
       (enable-console-print!))
     (when config/redux?
@@ -19,7 +19,6 @@
   (dev-setup)
   (events/register)
   (subs/register)
-  (re-frame/clear-subscription-cache!)
   (if state
     (re-frame/dispatch-sync [::events/set-db state])
     (re-frame/dispatch-sync [::events/initialize-db])))

@@ -60,6 +60,7 @@
                     :on-click #(re-frame/dispatch [::events/set-language lang-code])}
          lang-string])
 
+
 (defn translations-page []
   (let [readme (re-frame/subscribe [::subs/readme])
         readme-loading (re-frame/subscribe [::subs/readme-loading])
@@ -72,7 +73,9 @@
         (for [[lang-code lang-string] config/languages]
           ^{:key lang-code}
           [translate-button lang lang-code lang-string])]
-
+       [:p
+        ^{:notes "Name of the selected language"}
+        (tr @lang "Language")]
        [:p (tr @lang "Translation test")]
        [:p (tr @lang "Greetings")]
        [:p (tr @lang "Please confirm your email")]
