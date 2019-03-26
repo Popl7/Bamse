@@ -12,6 +12,11 @@ msgstr ""
 "X-Generator: Poedit 2.2.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#. Name of the selected language
+#: src/bamse/views.cljs
+msgid "Language"
+msgstr "Taal"
+
 #: src/bamse/views.cljs
 msgid "Translation test"
 msgstr "Vertaling test"

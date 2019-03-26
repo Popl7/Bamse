@@ -83,20 +83,12 @@
 ;; Default Interceptors
 ;;
 (def standard-interceptors-db
-  [(when (and config/bm-debug?
-              config/client?)
-     ;; re-frame.core/debug
-     )
-   (when config/redux? redux-debug)
+  [(when config/redux? redux-debug)
    check-spec-interceptor
    ssr-waits])
 
 (def standard-interceptors-fx
-  [(when (and config/bm-debug?
-              config/client?)
-     ;; re-frame.core/debug
-     )
-   (when config/redux? redux-debug)
+  [(when config/redux? redux-debug)
    check-spec-interceptor
    ssr-waits])
 

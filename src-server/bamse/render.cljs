@@ -11,10 +11,11 @@
   (:require-macros [cljs.core.async.macros :refer [go go-loop alt!]]))
 
 
-(defn register-events []
+(defn init-server []
   (re-frame/reg-fx
    :set-cookie
-   (fn [[key value]])))
+   (fn [[key value]]))
+)
 
 
 (def colors (nodejs/require "colors/safe"))
@@ -104,8 +105,8 @@
 (defn ^:export render-page [ch url path lang]
   (println "------- new request ------------------")
   (core/init)
-  (register-events)
-  (re-frame/dispatch [::events/set-language lang])
+  (init-server)
+  (re-frame/dispatch-sync [::events/set-language lang])
   (routes/navigate-to path)
 
   (let [render-chan  (chan)

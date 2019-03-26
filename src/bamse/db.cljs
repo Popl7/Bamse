@@ -4,7 +4,7 @@
 (def default-db
   {:title            nil
    :active-route     nil
-   :language         nil
+   :language         :en
    :mobile-menu-open false
    :ssr-waits     (set '())
    :readme           {:http-status :empty}

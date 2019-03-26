@@ -8,9 +8,7 @@
 (def default-image "https://robohash.org/bamse.png?set=set4")
 
 (def debug? ^boolean js/goog.DEBUG)
-(def bm-debug? false)
 (def redux? true)
-(def ssr? true)
 
 (def client?
   (try

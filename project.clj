@@ -8,5 +8,5 @@
   :main gettext.core
   :source-paths ["resources" "src"]
   :plugins [[lein-auto "0.1.3"]]
-  :auto {:default {:file-pattern #"\.(clj|po)$"}})
+  :auto {:default {:file-pattern #"\.(clj|cljs|po)$"}})
 

@@ -59,8 +59,7 @@
     (.use app (slow #js {:url   #"^/api/"
                          :delay 200})))
    ;; add routes
-  (when config/ssr?
-    (.get app "/" handle-request))
+  (.get app "/" handle-request)
   (.use app (serve-static "public"))
   (.use app (user-routes/routes))
   (.use app (test-routes/routes))
