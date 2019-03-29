@@ -6,6 +6,7 @@
    :active-route     nil
    :language         :en
    :mobile-menu-open false
+   :language-menu-open false
    :ssr-waits     (set '())
    :readme           {:http-status :empty}
    :url              {:http-status :empty}

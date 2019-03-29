@@ -12,3 +12,4 @@ npm-debug.log
 target
 .cpcache
 .lein-repl-history
+*.mo

@@ -1,7 +1,7 @@
 (ns bamse.users.views
  (:require [re-frame.core :as re-frame]
            [reagent.core :as r]
-           [bamse.helpers :refer [spinner user-avatar]]
+           [bamse.helpers :refer [tr trn spinner user-avatar]]
            [bamse.routes :refer [url-for navigate-to]]
            [bamse.config :as config]
            [bamse.subs :as subs]
@@ -40,24 +40,24 @@
  [:div
   [field {:user user
           :type :text
-          :label "First name"
+          :label (tr "First name")
           :id :first-name
           :class (if (valid-name (get @user :first-name)) "is-valid" "is-invalid")}]
 
   [field {:user user
           :type :text
-          :label "Last name"
+          :label (tr "Last name")
           :id :last-name
           :class (if (valid-name (get @user :last-name)) "is-valid" "is-invalid")}]
 
   [field {:user user
           :type :text
-          :label "Title"
+          :label (tr "Title")
           :id :title}]
 
   [field {:user user
           :type :textarea
-          :label "Description"
+          :label (tr "Description")
           :id :description}]])
 
 (defn user-add-form [user]
@@ -68,10 +68,10 @@
   [user-form user]
   [:div
    [:a.btn.btn-outline-secondary.mr-2 {:href (url-for :users)}
-    "Cancel"]
+    (tr "Cancel")]
    [:button.btn.btn-primary.mr-2 {:type     :submit
                                   :disabled (not (valid-user @user))}
-    "Add"]]])
+    (tr "Add")]]])
 
 
 (defn user-edit-form [user]
@@ -80,40 +80,40 @@
   [user-form user]
   [:div
    [:a.btn.btn-outline-secondary.mr-2 {:href (url-for :user :id (:id @user))}
-    "Cancel"]
+    (tr "Cancel")]
    [:button.btn.btn-primary.mr-2 {:type     :submit
                                   :disabled (not (valid-user @user))}
-    "Save"]]])
+    (tr "Save")]]])
 
 (defn user-detail [user]
   [:div
    [:div [user-avatar user]]
    [:div.mb-4 [:h3 (full-name user)]]
    [:div.row.my-2
-    [:div.col-12.col-md-2.font-weight-bold [:label "Title"]]
-    [:div.col-12.col-md-10 (:title user)]]
+    [:div.col-12.col-md-2.font-weight-bold [:label (tr "Title")]]
+    [:div.col-12.col-md-10 (or (:title user) "-")]]
    [:div.row.my-2
-    [:div.col-12.col-md-2.font-weight-bold [:label "Description"]]
-    [:div.col-12.col-md-10 (:description user)]]
+    [:div.col-12.col-md-2.font-weight-bold [:label (tr "Description")]]
+    [:div.col-12.col-md-10 (or (:description user) "-")]]
    [:div.my-2
     [:a.btn.btn-outline-secondary.mr-2 {:href (url-for :users)}
-     "Back"]
+     (tr "Back")]
     [:a.btn.btn-primary.mr-2 {:href (url-for :user-edit :id (:id user))}
-     "Edit"]
+     (tr "Edit")]
     [:button.btn.btn-danger.mr-2 {:type     :button
-                                  :on-click #(if (.confirm js/window "Are you sure?")
+                                  :on-click #(if (.confirm js/window (tr "Are you sure?"))
                                                (re-frame/dispatch [::user-events/delete-user (:id user)])
                                                (.preventDefault %))}
-                            "Delete"]]])
+     (tr "Delete")]]])
 
 (defn users-list [users]
  [:table.table.table-hover
   [:thead.thead-light
    [:tr
     [:th {:scope :col :style {:width 20}} "#"]
-    [:th {:scope :col :style {:width 60}} "avatar"]
-    [:th {:scope :col} "first name"]
-    [:th {:scope :col} "last name"]]]
+    [:th {:scope :col :style {:width 60}} (tr "avatar")]
+    [:th {:scope :col} (tr "first name")]
+    [:th {:scope :col} (tr "last name")]]]
   [:tbody
    (for [user users]
      ^{:key user}
@@ -131,18 +131,19 @@
   (r/create-class {:display-name           "users-component"
                    :reagent-render (fn []
                                        [:main.container
-                                        [:h1 "Users"]
-                                        [:a.btn.btn-outline-secondary.my-2 {:href (url-for :user-add)} "Add"]
+                                        [:h1 (tr "Users")]
+                                        [:a.btn.btn-outline-secondary.my-2 {:href (url-for :user-add)}
+                                         (tr "Add")]
                                         [:div
                                          (if @users-loading
                                           [spinner]
                                           (if (seq @users)
                                             [users-list @users]
-                                            [:div "no users"]))
+                                            [:div (tr "No users")]))
                                          (when config/debug?
                                           [:div
                                            [:button.btn.btn-secondary {:type     :button
-                                                                       :on-click #(re-frame/dispatch [::user-events/reget-users])} "reload"]])]])})))
+                                                                       :on-click #(re-frame/dispatch [::user-events/reget-users])} (tr "Reload")]])]])})))
 
 (defn user []
  (let [user (re-frame/subscribe [::user-subs/user])
@@ -153,24 +154,24 @@
     :display-name           "user-component"
     :reagent-render         (fn []
                               [:main.container
-                               [:h1 "User"]
+                               [:h1 (tr "User")]
                                [:div
                                 (if @loading
                                   [spinner]
                                   (if @user
                                     [user-detail @user]
-                                    [:div "no user"]))
+                                    [:div (tr "No user")]))
                                 (when config/debug?
                                  [:div
                                   [:button.btn.btn-secondary {:type     :button
-                                                              :on-click #(re-frame/dispatch [::user-events/reget-user @route-id])} "reload"]])]])})))
+                                                              :on-click #(re-frame/dispatch [::user-events/reget-user @route-id])} (tr "Reload")]])]])})))
 
 (defn user-add []
  (let [user (r/atom {})
        loading (re-frame/subscribe [::user-subs/add-user-loading])]
    (fn []
      [:main.container
-      [:h1 "New user"]
+      [:h1 (tr "New user")]
       (when @loading [spinner])
       [user-add-form user]])))
 
@@ -182,9 +183,9 @@
       :display-name           "edit-user-component"
       :reagent-render         (fn []
                                 [:main.container
-                                 [:h1 "Edit user"]
+                                 [:h1 (tr "Edit user")]
                                  (if @loading
                                    [spinner]
                                    (if @user
                                      [user-edit-form (r/atom @user)]
-                                     [:div "no user"]))])})))
+                                     [:div (tr "No user")]))])})))

@@ -20,16 +20,17 @@
 
 (def colors (nodejs/require "colors/safe"))
 
-(defn template [{:keys [url body state]}]
+(defn template [{:keys [body state url]}]
   (let [new-title       (if (:title state) (str config/default-title " - " (:title state)) config/default-title)
         new-description (if (:description state) (:description state) config/default-description)
+        lang            (name (:language state))
         og              (:og state)
         og-title        (or (:title og) new-title)
         og-type         (or (:type og) "article")
         og-url          (or (:url og) url)
         og-image        (or (:image og) config/default-image)
         og-description  (or (:description og) new-description)]
-    [:html {:lang "nl"}
+    [:html {:lang lang}
      [:head
       [:title new-title]
 
@@ -86,9 +87,9 @@
 (defn renderit [url]
   (let [db (re-frame/subscribe [::subs/db])]
     (str "<!DOCTYPE html>"
-         (r/render-to-string[template {:url   url
-                                       :body  core/app-view
-                                       :state @db}]))))
+         (r/render-to-string[template {:body  core/app-view
+                                       :state @db
+                                       :url   url}]))))
 
 (defn done-rendering [render-chan]
   (let [waits  (re-frame/subscribe [::subs/ssr-waits])
