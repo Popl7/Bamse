@@ -11,13 +11,15 @@
 
 (defn language-chooser [lang open]
   [:li.nav-item.dropdown {:class (when open "show")}
-   [:a.nav-link.dropdown-toggle {:href "#"
+   [:a.nav-link.dropdown-toggle {:id "navbarDropdown"
+                                 :href "#"
+                                 :role "button"
                                  :on-click #(re-frame/dispatch [::events/toggle-language-menu])
                                  :data-toggle "dropdown"
                                  :aria-haspopup "true"
                                  :aria-expanded "false"}
     (get config/languages lang)]
-   [:div.dropdown-menu {:aria-labelledby "navbarDropdownMenuLink"
+   [:div.dropdown-menu {:aria-labelledby "navbarDropdown"
                         :on-click #(re-frame/dispatch [::events/close-language-menu])
                         :class (when open "show")}
     (for [[lang-code lang-string] config/languages]

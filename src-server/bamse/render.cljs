@@ -34,6 +34,10 @@
      [:head
       [:title new-title]
 
+      [:meta {:charset "utf-8"}]
+      [:meta {:name    "viewport"
+              :content "width=device-width, initial-scale=1.0"}]
+
       [:meta {:name    "description"
               :content new-description}]
       [:meta {:property "og:title"
@@ -46,10 +50,6 @@
               :content  og-image}]
       [:meta {:property "og:description"
               :content  og-description}]
-
-      [:meta {:charset "utf-8"}]
-      [:meta {:name    "viewport"
-              :content "width=device-width, initial-scale=1.0"}]
 
       [:link {:rel  "stylesheet"
               :href "/css/main.css"}]
