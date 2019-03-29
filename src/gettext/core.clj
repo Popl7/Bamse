@@ -5,7 +5,7 @@
 
 (defn export-pot []
   (pottery/scan-codebase!
-   {:extract-fn (pottery/make-extractor ;; We use the lang as first argument to tr and trn.
+   {:extract-fn2 (pottery/make-extractor ;; We use the lang as first argument to tr and trn.
                  ['tr _ (s :guard string?) & _] s
                  ['trn _ [(s1 :guard string?) (s2 :guard string?)] & _] [s1 s2]
                  [(:or 'tr 'trn) & _] (pottery.scan/extraction-warning
