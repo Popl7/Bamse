@@ -9,7 +9,17 @@
     [bamse.users.views :as user-views]
     [bamse.routes :refer [url-for]]))
 
-(defn navigation [panel mobile-menu-open]
+(defn language-chooser [open]
+  [:div.dropdown-menu {:aria-labelledby "navbarDropdownMenuLink"
+                       :on-click #(re-frame/dispatch [::events/close-language-menu])
+                       :class (when open "show")}
+   (for [[lang-code lang-string] config/languages]
+      ^{:key lang-code}
+     [:a.dropdown-item {:href "#"
+                        :on-click #(re-frame/dispatch [::events/set-language lang-code])}
+      lang-string])])
+
+(defn navigation [panel mobile-menu-open language-menu-open]
   [:nav.navbar.navbar-dark.bg-dark.navbar-expand-md.fixed-top
    [:div.container
     [:a.navbar-brand {:href (url-for :home)} [:img {:src   "/img/home.svg"
@@ -31,11 +41,15 @@
       [:li.nav-item {:class (when (= panel :users) "active")}
        [:a.nav-link {:href (url-for :users)} "Users"]]
       [:li.nav-item {:class (when (= panel :not-found) "active")}
-       [:a.nav-link {:href "/fake"} "Not found"]]]]]])
-     ;; [:form {:class "form-inline my-2 my-lg-0"}
-     ;;  [:input {:class "form-control mr-sm-2", :type "search", :placeholder "Search"}]
-     ;;  [:button {:class "btn btn-outline-success my-2 my-sm-0", :type "submit"} "Search"]]
-
+       [:a.nav-link {:href "/fake"} "Not found"]]
+      [:li.nav-item.dropdown {:class (when language-menu-open "show")}
+       [:a.nav-link.dropdown-toggle {:href "#"
+                                     :on-click #(re-frame/dispatch [::events/toggle-language-menu])
+                                     :data-toggle "dropdown"
+                                     :aria-haspopup "true"
+                                     :aria-expanded "false"}
+        "Language"]
+       [language-chooser language-menu-open]]]]]])
 
 (defn not-found-page []
   [:main.container
@@ -69,19 +83,15 @@
       [:main.container
        [:h1 "Translations"]
        [:h4 "language: " (get config/languages @lang)]
-       [:div
-        (for [[lang-code lang-string] config/languages]
-          ^{:key lang-code}
-          [translate-button lang lang-code lang-string])]
        [:p
         ^{:notes "Name of the selected language"}
-        (tr @lang "Language")]
-       [:p (tr @lang "Translation test")]
-       [:p (tr @lang "Greetings")]
-       [:p (tr @lang "Please confirm your email")]
-       [:p (tr @lang "Welcome, %s!" "John")]
-       [:p (trn @lang ["product" "%s products"] 3)]
-       [:p (trn @lang ["product" "%s products"] 1)]])))
+        (tr "Language")]
+       [:p (tr "Translation test")]
+       [:p (tr "Greetings")]
+       [:p (tr "Please confirm your email")]
+       [:p (tr "Welcome, %s!" "John")]
+       [:p (trn ["product" "%s products"] 3)]
+       [:p (trn ["product" "%s products"] 1)]])))
 
 
 (defn about-page []
@@ -127,8 +137,9 @@
 
 (defn page []
   (let [active-route (re-frame/subscribe [::subs/active-route])
-        mobile-menu-open (re-frame/subscribe [::subs/mobile-menu-open])]
+        mobile-menu-open (re-frame/subscribe [::subs/mobile-menu-open])
+        language-menu-open (re-frame/subscribe [::subs/language-menu-open])]
     (fn []
       [:div
-       [navigation (:handler @active-route) @mobile-menu-open]
+       [navigation (:handler @active-route) @mobile-menu-open @language-menu-open]
        [panels @active-route]])))

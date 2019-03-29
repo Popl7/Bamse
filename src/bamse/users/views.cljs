@@ -1,7 +1,7 @@
 (ns bamse.users.views
  (:require [re-frame.core :as re-frame]
            [reagent.core :as r]
-           [bamse.helpers :refer [spinner user-avatar]]
+           [bamse.helpers :refer [tr trn spinner user-avatar]]
            [bamse.routes :refer [url-for navigate-to]]
            [bamse.config :as config]
            [bamse.subs :as subs]
@@ -90,11 +90,11 @@
    [:div [user-avatar user]]
    [:div.mb-4 [:h3 (full-name user)]]
    [:div.row.my-2
-    [:div.col-12.col-md-2.font-weight-bold [:label "Title"]]
-    [:div.col-12.col-md-10 (:title user)]]
+    [:div.col-12.col-md-2.font-weight-bold [:label (tr "Title")]]
+    [:div.col-12.col-md-10 (or (:title user) "-")]]
    [:div.row.my-2
-    [:div.col-12.col-md-2.font-weight-bold [:label "Description"]]
-    [:div.col-12.col-md-10 (:description user)]]
+    [:div.col-12.col-md-2.font-weight-bold [:label (tr "Description")]]
+    [:div.col-12.col-md-10 (or (:description user) "-")]]
    [:div.my-2
     [:a.btn.btn-outline-secondary.mr-2 {:href (url-for :users)}
      "Back"]

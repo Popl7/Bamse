@@ -39,6 +39,11 @@
   (fn [db _]
     (:mobile-menu-open db)))
 
+  (re-frame/reg-sub
+  ::language-menu-open
+  (fn [db _]
+    (:language-menu-open db)))
+
  (re-frame/reg-sub
   ::ssr-waits
   (fn [db _]

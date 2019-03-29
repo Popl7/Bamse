@@ -60,10 +60,20 @@
   (fn [db _]
     (assoc db :mobile-menu-open (not (:mobile-menu-open db)))))
 
- (reg-event-db
+  (reg-event-db
   ::close-mobile-menu
   (fn [db _]
     (assoc db :mobile-menu-open false)))
+
+  (reg-event-db
+  ::toggle-language-menu
+  (fn [db _]
+    (assoc db :language-menu-open (not (:language-menu-open db)))))
+
+ (reg-event-db
+  ::close-language-menu
+  (fn [db _]
+    (assoc db :language-menu-open false)))
 
 
 ;; readme
