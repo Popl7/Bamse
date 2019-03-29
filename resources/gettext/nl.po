@@ -69,10 +69,6 @@ msgid "last name"
 msgstr "achternaam"
 
 #: src/bamse/users/views.cljs
-msgid "Users"
-msgstr "Gebruikers"
-
-#: src/bamse/users/views.cljs
 msgid "No users"
 msgstr "Geen gebruikers"
 
@@ -92,7 +88,34 @@ msgstr "Nieuwe gebruiker"
 msgid "Edit user"
 msgstr "Bewerk gebruiker"
 
-#. Name of the selected language
+#: src/bamse/views.cljs
+msgid "Home"
+msgstr "Thuis"
+
+#: src/bamse/views.cljs
+msgid "Translations"
+msgstr "Vertalingen"
+
+#: src/bamse/views.cljs
+msgid "About"
+msgstr "Over ons"
+
+#: src/bamse/users/views.cljs src/bamse/views.cljs
+msgid "Users"
+msgstr "Gebruikers"
+
+#: src/bamse/views.cljs
+msgid "Not found"
+msgstr "Niet gevonden"
+
+#: src/bamse/views.cljs
+msgid "404 - Page not found"
+msgstr "404 - Pagina niet gevonden"
+
+#: src/bamse/views.cljs
+msgid "The requested page cannot be found :-("
+msgstr "De gevraagde pagina kan niet worden gevonden:-("
+
 #: src/bamse/views.cljs
 msgid "Language"
 msgstr "Taal"
@@ -119,6 +142,18 @@ msgid_plural "%s products"
 msgstr[0] "product"
 msgstr[1] "%s producten"
 
+#: src/bamse/views.cljs
+msgid "About Page"
+msgstr "Over ons"
+
+#: src/bamse/views.cljs
+msgid "Server rendered"
+msgstr "Server gerenderd"
+
 #: src/bamse/users/views.cljs src/bamse/views.cljs
 msgid "Reload"
 msgstr "Herladen"
+
+#: src/bamse/views.cljs
+msgid "Client rendered"
+msgstr "Client gerenderd"

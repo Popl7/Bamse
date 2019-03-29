@@ -7,7 +7,6 @@
 
 (def routes ["/"     {""              :home
                       "about"         :about
-                      "translations"  :translations
                       "users/new"     :user-add
                       "users"         :users
                       ["user/"  :id]  :user

@@ -55,10 +55,6 @@ msgid "last name"
 msgstr ""
 
 #: src/bamse/users/views.cljs
-msgid "Users"
-msgstr ""
-
-#: src/bamse/users/views.cljs
 msgid "No users"
 msgstr ""
 
@@ -78,33 +74,38 @@ msgstr ""
 msgid "Edit user"
 msgstr ""
 
-#. Name of the selected language
 #: src/bamse/views.cljs
-msgid "Language"
+msgid "About"
+msgstr ""
+
+#: src/bamse/users/views.cljs src/bamse/views.cljs
+msgid "Users"
 msgstr ""
 
 #: src/bamse/views.cljs
-msgid "Translation test"
+msgid "Not found"
 msgstr ""
 
 #: src/bamse/views.cljs
-msgid "Greetings"
+msgid "404 - Page not found"
 msgstr ""
 
 #: src/bamse/views.cljs
-msgid "Please confirm your email"
+msgid "The requested page cannot be found :-("
 msgstr ""
 
 #: src/bamse/views.cljs
-msgid "Welcome, %s!"
+msgid "About Page"
 msgstr ""
 
 #: src/bamse/views.cljs
-msgid "product"
-msgid_plural "%s products"
-msgstr[0] ""
-msgstr[1] ""
+msgid "Server rendered"
+msgstr ""
 
 #: src/bamse/users/views.cljs src/bamse/views.cljs
 msgid "Reload"
+msgstr ""
+
+#: src/bamse/views.cljs
+msgid "Client rendered"
 msgstr ""

@@ -40,22 +40,18 @@
     [:div#navbarToggler.collapse.navbar-collapse {:class (when mobile-menu-open "show")}
      [:ul.navbar-nav.mr-auto.mt-2.mt-md-0 {:on-click (when mobile-menu-open
                                                          #(re-frame/dispatch [::events/close-mobile-menu]))}
-      [:li.nav-item {:class (when (= panel :home) "active")}
-       [:a.nav-link {:href (url-for :home)} "Home"]]
-      [:li.nav-item {:class (when (= panel :translations) "active")}
-       [:a.nav-link {:href (url-for :translations)} "Translations"]]
       [:li.nav-item {:class (when (= panel :about) "active")}
-       [:a.nav-link {:href (url-for :about)} "About"]]
+       [:a.nav-link {:href (url-for :about)} (tr "About")]]
       [:li.nav-item {:class (when (= panel :users) "active")}
-       [:a.nav-link {:href (url-for :users)} "Users"]]
+       [:a.nav-link {:href (url-for :users)} (tr "Users")]]
       [:li.nav-item {:class (when (= panel :not-found) "active")}
-       [:a.nav-link {:href "/fake"} "Not found"]]
+       [:a.nav-link {:href "/fake"} (tr "Not found")]]
       [language-chooser lang language-menu-open]]]]])
 
 (defn not-found-page []
   [:main.container
-   [:h1 "404 - Page not found"]
-   [:p "The requested page cannot be found :-("]])
+   [:h1 (tr "404 - Page not found")]
+   [:p (tr "The requested page cannot be found :-(")]])
 
 
 (defn home-page []
@@ -76,25 +72,6 @@
          lang-string])
 
 
-(defn translations-page []
-  (let [readme (re-frame/subscribe [::subs/readme])
-        readme-loading (re-frame/subscribe [::subs/readme-loading])
-        lang (re-frame/subscribe [::subs/language])]
-    (fn []
-      [:main.container
-       [:h1 "Translations"]
-       [:h4 "language: " (get config/languages @lang)]
-       [:p
-        ^{:notes "Name of the selected language"}
-        (tr "Language")]
-       [:p (tr "Translation test")]
-       [:p (tr "Greetings")]
-       [:p (tr "Please confirm your email")]
-       [:p (tr "Welcome, %s!" "John")]
-       [:p (trn ["product" "%s products"] 3)]
-       [:p (trn ["product" "%s products"] 1)]])))
-
-
 (defn about-page []
   (let [url (re-frame/subscribe [::subs/url])
         url-loading (re-frame/subscribe [::subs/url-loading])
@@ -102,8 +79,8 @@
         poe-loading (re-frame/subscribe [::subs/poe-loading])]
     (fn []
       [:main.container
-       [:h1 "About Page"]
-       [:h4 "Server rendered"]
+       [:h1 (tr "About Page")]
+       [:h4 (tr "Server rendered")]
        [:div
         (when @url-loading
           [spinner])
@@ -112,7 +89,7 @@
           [:div.my-2
            [:button.btn.btn-secondary {:type     :button
                                        :on-click #(re-frame/dispatch [::events/reget-url])} (tr "Reload")]])]
-       [:h4 "Client rendered"]
+       [:h4 (tr "Client rendered")]
        [:div
         (when @poe-loading
           [spinner])
@@ -128,7 +105,6 @@
   (case (:handler route)
     :home        [home-page]
     :about       [about-page]
-    :translations [translations-page]
     :user-add    [user-views/user-add]
     :users       [user-views/users]
     :user        [user-views/user]
