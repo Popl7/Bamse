@@ -89,14 +89,6 @@ msgid "Edit user"
 msgstr "Bewerk gebruiker"
 
 #: src/bamse/views.cljs
-msgid "Home"
-msgstr "Thuis"
-
-#: src/bamse/views.cljs
-msgid "Translations"
-msgstr "Vertalingen"
-
-#: src/bamse/views.cljs
 msgid "About"
 msgstr "Over ons"
 
@@ -113,34 +105,12 @@ msgid "404 - Page not found"
 msgstr "404 - Pagina niet gevonden"
 
 #: src/bamse/views.cljs
+msgid "test vertaling"
+msgstr "testESTING IT NOW"
+
+#: src/bamse/views.cljs
 msgid "The requested page cannot be found :-("
 msgstr "De gevraagde pagina kan niet worden gevonden:-("
-
-#: src/bamse/views.cljs
-msgid "Language"
-msgstr "Taal"
-
-#: src/bamse/views.cljs
-msgid "Translation test"
-msgstr "Vertaling test"
-
-#: src/bamse/views.cljs
-msgid "Greetings"
-msgstr "Groeten"
-
-#: src/bamse/views.cljs
-msgid "Please confirm your email"
-msgstr "Bevestig uw e-mail"
-
-#: src/bamse/views.cljs
-msgid "Welcome, %s!"
-msgstr "Welkom %s!"
-
-#: src/bamse/views.cljs
-msgid "product"
-msgid_plural "%s products"
-msgstr[0] "product"
-msgstr[1] "%s producten"
 
 #: src/bamse/views.cljs
 msgid "About Page"
@@ -157,3 +127,29 @@ msgstr "Herladen"
 #: src/bamse/views.cljs
 msgid "Client rendered"
 msgstr "Client gerenderd"
+
+#~ msgid "Home"
+#~ msgstr "Thuis"
+
+#~ msgid "Translations"
+#~ msgstr "Vertalingen"
+
+#~ msgid "Language"
+#~ msgstr "Taal"
+
+#~ msgid "Translation test"
+#~ msgstr "Vertaling test"
+
+#~ msgid "Greetings"
+#~ msgstr "Groeten"
+
+#~ msgid "Please confirm your email"
+#~ msgstr "Bevestig uw e-mail"
+
+#~ msgid "Welcome, %s!"
+#~ msgstr "Welkom %s!"
+
+#~ msgid "product"
+#~ msgid_plural "%s products"
+#~ msgstr[0] "product"
+#~ msgstr[1] "%s producten"
