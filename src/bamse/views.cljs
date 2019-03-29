@@ -9,17 +9,25 @@
     [bamse.users.views :as user-views]
     [bamse.routes :refer [url-for]]))
 
-(defn language-chooser [open]
-  [:div.dropdown-menu {:aria-labelledby "navbarDropdownMenuLink"
-                       :on-click #(re-frame/dispatch [::events/close-language-menu])
-                       :class (when open "show")}
-   (for [[lang-code lang-string] config/languages]
+(defn language-chooser [lang open]
+  [:li.nav-item.dropdown {:class (when open "show")}
+   [:a.nav-link.dropdown-toggle {:href "#"
+                                 :on-click #(re-frame/dispatch [::events/toggle-language-menu])
+                                 :data-toggle "dropdown"
+                                 :aria-haspopup "true"
+                                 :aria-expanded "false"}
+    (get config/languages lang)]
+   [:div.dropdown-menu {:aria-labelledby "navbarDropdownMenuLink"
+                        :on-click #(re-frame/dispatch [::events/close-language-menu])
+                        :class (when open "show")}
+    (for [[lang-code lang-string] config/languages]
       ^{:key lang-code}
-     [:a.dropdown-item {:href "#"
-                        :on-click #(re-frame/dispatch [::events/set-language lang-code])}
-      lang-string])])
+      [:a.dropdown-item {:href "#"
+                         :class (when (= lang lang-code) "active")
+                         :on-click #(re-frame/dispatch [::events/set-language lang-code])}
+       lang-string])]])
 
-(defn navigation [panel mobile-menu-open language-menu-open]
+(defn navigation [panel lang mobile-menu-open language-menu-open]
   [:nav.navbar.navbar-dark.bg-dark.navbar-expand-md.fixed-top
    [:div.container
     [:a.navbar-brand {:href (url-for :home)} [:img {:src   "/img/home.svg"
@@ -42,14 +50,7 @@
        [:a.nav-link {:href (url-for :users)} "Users"]]
       [:li.nav-item {:class (when (= panel :not-found) "active")}
        [:a.nav-link {:href "/fake"} "Not found"]]
-      [:li.nav-item.dropdown {:class (when language-menu-open "show")}
-       [:a.nav-link.dropdown-toggle {:href "#"
-                                     :on-click #(re-frame/dispatch [::events/toggle-language-menu])
-                                     :data-toggle "dropdown"
-                                     :aria-haspopup "true"
-                                     :aria-expanded "false"}
-        "Language"]
-       [language-chooser language-menu-open]]]]]])
+      [language-chooser lang language-menu-open]]]]])
 
 (defn not-found-page []
   [:main.container
@@ -110,7 +111,7 @@
         (when config/debug?
           [:div.my-2
            [:button.btn.btn-secondary {:type     :button
-                                       :on-click #(re-frame/dispatch [::events/reget-url])} "reload"]])]
+                                       :on-click #(re-frame/dispatch [::events/reget-url])} (tr "Reload")]])]
        [:h4 "Client rendered"]
        [:div
         (when @poe-loading
@@ -119,7 +120,7 @@
         (when config/debug?
           [:div.my-2
            [:button.btn.btn-secondary {:type     :button
-                                       :on-click #(re-frame/dispatch [::events/reget-poe])} "reload"]])]])))
+                                       :on-click #(re-frame/dispatch [::events/reget-poe])} (tr "Reload")]])]])))
 
 
 ;; main
@@ -137,9 +138,10 @@
 
 (defn page []
   (let [active-route (re-frame/subscribe [::subs/active-route])
+        lang (re-frame/subscribe [::subs/language])
         mobile-menu-open (re-frame/subscribe [::subs/mobile-menu-open])
         language-menu-open (re-frame/subscribe [::subs/language-menu-open])]
     (fn []
       [:div
-       [navigation (:handler @active-route) @mobile-menu-open @language-menu-open]
+       [navigation (:handler @active-route) @lang @mobile-menu-open @language-menu-open]
        [panels @active-route]])))

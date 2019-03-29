@@ -61,19 +61,19 @@
     (assoc db :mobile-menu-open (not (:mobile-menu-open db)))))
 
   (reg-event-db
-  ::close-mobile-menu
-  (fn [db _]
-    (assoc db :mobile-menu-open false)))
+   ::close-mobile-menu
+   (fn [db _]
+     (assoc db :mobile-menu-open false)))
 
   (reg-event-db
-  ::toggle-language-menu
-  (fn [db _]
-    (assoc db :language-menu-open (not (:language-menu-open db)))))
+   ::toggle-language-menu
+   (fn [db _]
+     (assoc db :language-menu-open (not (:language-menu-open db)))))
 
- (reg-event-db
-  ::close-language-menu
-  (fn [db _]
-    (assoc db :language-menu-open false)))
+  (reg-event-db
+   ::close-language-menu
+   (fn [db _]
+     (assoc db :language-menu-open false)))
 
 
 ;; readme
@@ -153,22 +153,22 @@
   (fn [{:keys [:db]} [_ res]]
     (println "BAD" (:status-text res))
     {:db (assoc db :poe {:http-status :error
-                         :http-error "error"})}))
+                         :http-error "error"})})))
 
- (reg-event-fx
-  ::reget-poe
-  (fn [{:keys [:db]} _]
-    {:db (assoc db :poe {:http-status :empty})
-     :dispatch [::get-poe]}))
+(reg-event-fx
+ ::reget-poe
+ (fn [{:keys [:db]} _]
+   {:db (assoc db :poe {:http-status :empty})
+    :dispatch [::get-poe]}))
 
- (reg-event-fx
-  ::get-poe
-  (fn [{:keys [:db]} _]
-    (if (and config/client?
-         (= (get-in db [:poe :http-status]) :empty))
-      {:db (-> db
-               (assoc :poe {:http-status :loading}))
-       :http-fx {:uri  "/api/poe"
-                 :on-success [::good-poe-result]
-                 :on-failure [::bad-poe-result]}}
-      {}))))
+(reg-event-fx
+ ::get-poe
+ (fn [{:keys [:db]} _]
+   (if (and config/client?
+            (= (get-in db [:poe :http-status]) :empty))
+     {:db (-> db
+              (assoc :poe {:http-status :loading}))
+      :http-fx {:uri  "/api/poe"
+                :on-success [::good-poe-result]
+                :on-failure [::bad-poe-result]}}
+     {})))

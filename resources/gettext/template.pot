@@ -1,9 +1,81 @@
 #: src/bamse/users/views.cljs
+msgid "First name"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "Last name"
+msgstr ""
+
+#: src/bamse/users/views.cljs
 msgid "Title"
 msgstr ""
 
 #: src/bamse/users/views.cljs
 msgid "Description"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "Cancel"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "Add"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "Save"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "Back"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "Edit"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "Are you sure?"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "Delete"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "avatar"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "first name"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "last name"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "Users"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "No users"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "User"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "No user"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "New user"
+msgstr ""
+
+#: src/bamse/users/views.cljs
+msgid "Edit user"
 msgstr ""
 
 #. Name of the selected language
@@ -32,3 +104,7 @@ msgid "product"
 msgid_plural "%s products"
 msgstr[0] ""
 msgstr[1] ""
+
+#: src/bamse/users/views.cljs src/bamse/views.cljs
+msgid "Reload"
+msgstr ""

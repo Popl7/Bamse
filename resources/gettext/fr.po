@@ -13,12 +13,84 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/bamse/users/views.cljs
+msgid "First name"
+msgstr "Prénom"
+
+#: src/bamse/users/views.cljs
+msgid "Last name"
+msgstr "Nom de famille"
+
+#: src/bamse/users/views.cljs
 msgid "Title"
 msgstr "Titre"
 
 #: src/bamse/users/views.cljs
 msgid "Description"
 msgstr "Description"
+
+#: src/bamse/users/views.cljs
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/bamse/users/views.cljs
+msgid "Add"
+msgstr "Ajouter"
+
+#: src/bamse/users/views.cljs
+msgid "Save"
+msgstr "Enregistrer"
+
+#: src/bamse/users/views.cljs
+msgid "Back"
+msgstr "Retour"
+
+#: src/bamse/users/views.cljs
+msgid "Edit"
+msgstr "Modifier"
+
+#: src/bamse/users/views.cljs
+msgid "Are you sure?"
+msgstr "Êtes-vous sûr?"
+
+#: src/bamse/users/views.cljs
+msgid "Delete"
+msgstr "Effacer"
+
+#: src/bamse/users/views.cljs
+msgid "avatar"
+msgstr "avatar"
+
+#: src/bamse/users/views.cljs
+msgid "first name"
+msgstr "prénom"
+
+#: src/bamse/users/views.cljs
+msgid "last name"
+msgstr "nom de famille"
+
+#: src/bamse/users/views.cljs
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: src/bamse/users/views.cljs
+msgid "No users"
+msgstr "Pas d'utilisateurs"
+
+#: src/bamse/users/views.cljs
+msgid "User"
+msgstr "Utilisateur"
+
+#: src/bamse/users/views.cljs
+msgid "No user"
+msgstr "Pas d'utilisateurs"
+
+#: src/bamse/users/views.cljs
+msgid "New user"
+msgstr "Nouveau utilisateur"
+
+#: src/bamse/users/views.cljs
+msgid "Edit user"
+msgstr "Modifier utilisateur"
 
 #. Name of the selected language
 #: src/bamse/views.cljs
@@ -46,3 +118,7 @@ msgid "product"
 msgid_plural "%s products"
 msgstr[0] "produit"
 msgstr[1] "%s produits"
+
+#: src/bamse/users/views.cljs src/bamse/views.cljs
+msgid "Reload"
+msgstr "Recharger"
