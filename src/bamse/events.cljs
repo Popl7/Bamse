@@ -75,6 +75,12 @@
    (fn [db _]
      (assoc db :language-menu-open false)))
 
+  (reg-event-db
+   ::close-all-menus
+   (fn [db _]
+     (-> db
+         (assoc :mobile-menu-open false)
+         (assoc :language-menu-open false))))
 
 ;; readme
  (reg-event-fx

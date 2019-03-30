@@ -14,7 +14,9 @@
    [:a.nav-link.dropdown-toggle {:id "navbarDropdown"
                                  :href "#"
                                  :role "button"
-                                 :on-click #(re-frame/dispatch [::events/toggle-language-menu])
+                                 :on-click (fn [evt]
+                                             (.stopPropagation evt)
+                                             (re-frame/dispatch [::events/toggle-language-menu]))
                                  :data-toggle "dropdown"
                                  :aria-haspopup "true"
                                  :aria-expanded "false"}
@@ -41,7 +43,7 @@
      [:span.navbar-toggler-icon]]
     [:div#navbarToggler.collapse.navbar-collapse {:class (when mobile-menu-open "show")}
      [:ul.navbar-nav.mr-auto.mt-2.mt-md-0 {:on-click (when mobile-menu-open
-                                                         #(re-frame/dispatch [::events/close-mobile-menu]))}
+                                                       #(re-frame/dispatch [::events/close-all-menus]))}
       [:li.nav-item {:class (when (= panel :about) "active")}
        [:a.nav-link {:href (url-for :about)} (tr "About")]]
       [:li.nav-item {:class (when (= panel :users) "active")}
