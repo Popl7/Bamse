@@ -10,16 +10,17 @@
 (def debug? ^boolean js/goog.DEBUG)
 (def redux? true)
 
-(def client?
+(def server?
   (try
-    (if js/document
-      true
-      false)
+    (and
+     (exists? js/process)
+     (exists? js/process.versions)
+     (exists? js/process.versions.node))
     (catch :default _
       false)))
 
-(def server?
-  (not client?))
+(def client?
+  (not server?))
 
 (def ajax-timeout 1000)
 
@@ -33,9 +34,8 @@
 ;; Translations
 (def languages {:en "English"
                 :nl "Nederlands"
-                :fr "Francais"})
+                :fr "Français"})
 
 (def dictionary
   {:nl (edn/read-string (rc/inline "nl.edn"))
    :fr (edn/read-string (rc/inline "fr.edn"))})
-
