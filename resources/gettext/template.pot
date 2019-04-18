@@ -1,111 +1,111 @@
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "First name"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "Last name"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "Title"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "Description"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "Cancel"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "Add"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "Save"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "Back"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "Edit"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "Are you sure?"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "Delete"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "avatar"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "first name"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "last name"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "No users"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "User"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "No user"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "New user"
 msgstr ""
 
-#: src/bamse/users/views.cljs
+#: src/bamse/users/views.cljc
 msgid "Edit user"
 msgstr ""
 
-#: src/bamse/views.cljs
+#: src/bamse/views.cljc
 msgid "About"
 msgstr ""
 
-#: src/bamse/users/views.cljs src/bamse/views.cljs
+#: src/bamse/users/views.cljc src/bamse/views.cljc
 msgid "Users"
 msgstr ""
 
-#: src/bamse/views.cljs
+#: src/bamse/views.cljc
 msgid "Not found"
 msgstr ""
 
-#: src/bamse/views.cljs
+#: src/bamse/views.cljc
 msgid "404 - Page not found"
 msgstr ""
 
-#: src/bamse/views.cljs
+#: src/bamse/views.cljc
 msgid "The requested page cannot be found :-("
 msgstr ""
 
-#: src/bamse/views.cljs
+#: src/bamse/views.cljc
 msgid "About Page"
 msgstr ""
 
-#: src/bamse/views.cljs
+#: src/bamse/views.cljc
 msgid "Server rendered"
 msgstr ""
 
-#: src/bamse/users/views.cljs src/bamse/views.cljs
+#: src/bamse/users/views.cljc src/bamse/views.cljc
 msgid "Reload"
 msgstr ""
 
-#: src/bamse/views.cljs
+#: src/bamse/views.cljc
 msgid "Client rendered"
 msgstr ""

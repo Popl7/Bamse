@@ -50,10 +50,11 @@
 
 
              :server {:target :node-script
-                       :main bamse.server/main
-                       :output-to "resources/server/server.js"
-                       :output-dir "resources/server"
+                      :main bamse.server/main
+                      :output-to "resources/server/server.js"
+                      :output-dir "resources/server"
 
-                       :dev {:devtools {:after-load bamse.server/restart}}
+                      :dev {:devtools {:after-load bamse.server/restart}
+                            :compiler-options {:reader-features #{:cljs/ssr}}}
 
-                       :release {:compiler-options {:optimizations :simple}}}}}
+                      :release {:compiler-options {:optimizations :simple}}}}}

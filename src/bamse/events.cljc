@@ -4,7 +4,9 @@
    [re-frame-redux.core :as redux]
    [bamse.config :as config]
    [bamse.db :as db]
-   [bamse.users.events]
+   #?@(:cljs/ssr [[bamse.users.events]]
+       :default [[bamse.users.events]
+                 [goog.net.cookies]])
    [bamse.helpers :refer [reg-event-db reg-event-fx]]))
 
 (defn register []
@@ -12,7 +14,19 @@
  (bamse.users.events/register)
  (redux/register-redux-events :bamse.db/db)
 
- (reg-event-db
+  #?(:cljs/ssr nil
+     :cljs/browser (defn set-cookie! [k v]
+                     (.set goog.net.cookies k v)))
+
+  #?(:cljs/ssr (re-frame/reg-fx
+                :set-cookie
+                (fn [[key value]]))
+     :cljs/browser (re-frame/reg-fx
+                    :set-cookie
+                    (fn [[key value]]
+                      (set-cookie! key (name value)))))
+
+  (reg-event-db
   ::initialize-db
   (fn [_ _]
     db/default-db))

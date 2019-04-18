@@ -3,7 +3,10 @@
    [re-frame.core :as re-frame]
    [bidi.bidi :as bidi]
    [bamse.events :as events]
-   [bamse.users.events :as users]))
+   [bamse.users.events :as users]
+   #?@(:cljs/ssr [[re-frame.core :as re-frame]]
+       :cljs/browser [[re-frame.core :as re-frame]
+                      [pushy.core :as pushy]])))
 
 (def routes ["/"     {""              :home
                       "about"         :about
@@ -43,3 +46,24 @@
 
 (defn navigate-to [path]
  (dispatch-route (parse-url path)))
+
+#?(:cljs/ssr (println ":cljs/ssr")
+   :cljs/browser (println ":cljs/browser"))
+
+#?(:cljs/ssr (def history nil)
+   :cljs/browser (def history
+                   (println "BROWSER")
+                   (pushy/pushy dispatch-route parse-url)))
+
+#?(:cljs/ssr (defn set-pushstate! [_])
+   :cljs/browser (defn set-pushstate! [path]
+                   (pushy/set-token! history path))
+   )
+
+#?(:cljs/ssr (defn client-init [])
+   :cljs/browser (defn client-init []
+                   (pushy/start! history)
+                   (re-frame/reg-fx :navigate-to
+                                    (fn [path]
+                                      (set-pushstate! path))))
+   :default (defn client-init []))
