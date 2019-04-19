@@ -26,13 +26,13 @@
  :dev-http {4200 "resources/public"}
 
  :builds {:client {:target :browser
-                   :main bamse.client/init
-                   :modules {:main {:entries [bamse.client]}}
+                   :main bamse.browser/init
+                   :modules {:main {:entries [bamse.browser]}}
                    :output-dir "resources/public/js"
                    :asset-path "/js"
 
                    :dev {:compiler-options {:closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}}
-                         :devtools {:after-load bamse.client/reload
+                         :devtools {:after-load bamse.browser/reload
                                     :preloads   [devtools.preload
                                                  ;; day8.re-frame-10x.preload
                                                  ]}}

@@ -1,7 +1,7 @@
 (ns bamse.server
   (:require [cljs.nodejs :as nodejs]
             [bamse.config :as config]
-            [bamse.render :as render]
+            [bamse.ssr :as ssr]
             [bamse.user-routes :as user-routes]
             [bamse.test-routes :as test-routes]
             [cljs.core.async :refer [chan <!]])
@@ -28,7 +28,7 @@
                      :language
                      keyword)
                  :nl)
-        render-chan (render/render-page ch full-url (.-path req) lang)]
+        render-chan (ssr/render-page ch full-url (.-path req) lang)]
     (go
       (.send res (<! render-chan)))))
 
