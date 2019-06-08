@@ -9,11 +9,9 @@
 
 (defn dev-setup []
   (when config/debug?
-    (println "[App] Running in development mode")
-    (when config/server?
-      (println "[App] Running on server"))
+    (println "[App] Running in development mode on"
+             (if config/server? "server" "browser"))
     (when config/client?
-      (println "[App] Running on browser")
       (enable-console-print!))
     (when config/redux?
       (redux/setup))))
