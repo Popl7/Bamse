@@ -52,7 +52,6 @@
 
 #?(:cljs/ssr (def history nil)
    :cljs/browser (def history
-                   (println "BROWSER")
                    (pushy/pushy dispatch-route parse-url)))
 
 #?(:cljs/ssr (defn set-pushstate! [_])
