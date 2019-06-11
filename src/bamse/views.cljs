@@ -11,12 +11,8 @@
 
 (defn language-chooser [lang open]
   [:li.nav-item.dropdown {:class (when open "show")}
-   [:a.nav-link.dropdown-toggle {:id "navbarDropdown"
-                                 :href "#"
-                                 :role "button"
-                                 :on-click (fn [evt]
-                                             (.stopPropagation evt)
-                                             (re-frame/dispatch [::events/toggle-language-menu]))
+   [:a.nav-link.dropdown-toggle {:href "#"
+                                 :on-click #(re-frame/dispatch [::events/toggle-language-menu])
                                  :data-toggle "dropdown"
                                  :aria-haspopup "true"
                                  :aria-expanded "false"}
