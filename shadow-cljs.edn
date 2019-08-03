@@ -38,13 +38,13 @@
                    :release {:compiler-options {:optimizations :advanced}}}
 
 
-            :devcards {:target :browser
-                       :modules {:main {:entries [bamse.devcards]}}
-                       :output-dir "resources/public/js/devcards"
-                       :asset-path "/js/devcards"
+            ;; :devcards {:target :browser
+            ;;            :modules {:main {:entries [bamse.devcards]}}
+            ;;            :output-dir "resources/public/js/devcards"
+            ;;            :asset-path "/js/devcards"
 
-                       :dev {:compiler-options {:devcards true}
-                             :devtools {:preloads [devcards.core]}}}
+            ;;            :dev {:compiler-options {:devcards true}
+            ;;                  :devtools {:preloads [devcards.core]}}}
 
 
              :server {:target :node-script
