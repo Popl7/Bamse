@@ -1,9 +1,9 @@
-(ns bamse.server
+(ns ^:figwheel-hooks bamse.server
   (:require [cljs.nodejs :as nodejs]
             [bamse.config :as config]
-            [bamse.render :as render]
-            [bamse.user-routes :as user-routes]
-            [bamse.test-routes :as test-routes]
+            [bamse.server.render :as render]
+            [bamse.server.user-routes :as user-routes]
+            [bamse.server.test-routes :as test-routes]
             [cljs.core.async :refer [chan <!]])
   (:require-macros [cljs.core.async.macros :refer [go]]))
 
@@ -54,13 +54,14 @@
   ;; parse cookies
   (.use app (cookie-parser))
 
-   ;; on development, slow down api server
+  ;; on development, slow down api server
   (when config/debug?
     (.use app (slow #js {:url   #"^/api/"
                          :delay 200})))
-   ;; add routes
+  ;; add routes
   (.get app "/" handle-request)
-  (.use app (serve-static "public"))
+  (.use app (serve-static "resources/public"))
+  (.use app (serve-static "client"))
   (.use app (user-routes/routes))
   (.use app (test-routes/routes))
   (.get app "*" handle-request)
@@ -83,9 +84,11 @@
   (println (.red colors "Starting server..."))
   (reset! server (start-server)))
 
-(defn restart []
+(defn ^:before-load restart []
   (stop)
   (start))
 
-(defn ^:export main []
+(defn main []
   (start))
+
+(set! *main-cli-fn* main)

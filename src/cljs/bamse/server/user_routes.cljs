@@ -1,6 +1,6 @@
-(ns bamse.user-routes
+(ns bamse.server.user-routes
   (:require [cljs.nodejs :as nodejs]
-            [bamse.server-db :as db]))
+            [bamse.server.server-db :as db]))
 
 (def express (nodejs/require "express"))
 

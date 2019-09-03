@@ -22,7 +22,7 @@
   (fn [db _]
     (:active-route db)))
 
-  (re-frame/reg-sub
+ (re-frame/reg-sub
   ::language
   (fn [db _]
     (:language db)))
@@ -39,7 +39,7 @@
   (fn [db _]
     (:mobile-menu-open db)))
 
-  (re-frame/reg-sub
+ (re-frame/reg-sub
   ::language-menu-open
   (fn [db _]
     (:language-menu-open db)))

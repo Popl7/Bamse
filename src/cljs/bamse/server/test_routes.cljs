@@ -1,12 +1,12 @@
-(ns bamse.test-routes
-  (:require [cljs.nodejs :as nodejs]
-            [shadow.resource :as rc]))
+(ns bamse.server.test-routes
+  (:require [cljs.nodejs :as nodejs])
+  (:require-macros [bamse.macros :refer [load-readme]]))
 
 (def express (nodejs/require "express"))
 (def markdown ((nodejs/require "markdown-it") "default"))
 
 (def readme
- (rc/inline "README.md"))
+  (load-readme))
 
 (defn api-error [req res]
  (println "test api - 404" (.-path req))

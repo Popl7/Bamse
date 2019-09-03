@@ -12,4 +12,7 @@ npm-debug.log
 target
 .cpcache
 .lein-repl-history
+.rebel_readline-history
+figwheel_server.log
 *.mo
+dist

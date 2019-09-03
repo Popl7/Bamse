@@ -1,7 +1,6 @@
 (ns bamse.config
-  (:require [shadow.resource :as rc]
-            ;; [cljs.tools.reader :as treader]
-            [cljs.tools.reader.edn :as edn]))
+  (:require [cljs.tools.reader.edn :as edn])
+  (:require-macros [bamse.macros :refer [load-translation]]))
 
 (def default-title "Bamse")
 (def default-description "Universal app build using ClojureScript. Uses Re-Frame framework. Renders on server and client")
@@ -37,5 +36,5 @@
                 :fr "Français"})
 
 (def dictionary
-  {:nl (edn/read-string (rc/inline "nl.edn"))
-   :fr (edn/read-string (rc/inline "fr.edn"))})
+  {:nl (edn/read-string (load-translation "nl.edn"))
+   :fr (edn/read-string (load-translation "fr.edn"))})

@@ -1,3 +1,2 @@
-node: npm run server
 sass: npm run sass
-pottery: lein auto run
+pottery: npm run pottery
