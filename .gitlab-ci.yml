@@ -53,9 +53,9 @@ deploy:
   script:
     # add git version info
     - GIT_DATE=$(date '+%Y-%m-%d %H:%M')
-    - sed -i -e "s@MY_GIT_BRANCH@$CI_COMMIT_REF_NAME@"  dist/public/VERSION.txt
-    - sed -i -e "s@MY_GIT_SHA@$CI_COMMIT_SHA@"          dist/public/VERSION.txt
-    - sed -i -e "s@MY_GIT_DATE@$GIT_DATE@"              dist/public/VERSION.txt
+    - sed -i -e "s@MY_GIT_BRANCH@$CI_COMMIT_REF_NAME@"  dist/client/VERSION.txt
+    - sed -i -e "s@MY_GIT_SHA@$CI_COMMIT_SHA@"          dist/client/VERSION.txt
+    - sed -i -e "s@MY_GIT_DATE@$GIT_DATE@"              dist/client/VERSION.txt
     # upload to server
     - rm dist/client/index.html
     - rsync -hrvz --delete --exclude=node_modules -e ssh dist/ ${SSH_USER}@${SSH_SERVER}:~/bamse/
