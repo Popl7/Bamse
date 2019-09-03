@@ -36,6 +36,8 @@ build:
 deploy:
   stage: deploy
   image: unrealistic/ubuntu-opensshclient-rsync
+  only:
+    - master
   environment:
     name: demo
     url: https://bamse.ln2.nl

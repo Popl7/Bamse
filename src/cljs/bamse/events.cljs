@@ -17,16 +17,16 @@
   (fn [_ _]
     db/default-db))
 
-  (reg-event-db
-   ::set-db
-   (fn [_ [_ new-db]]
-     new-db))
+ (reg-event-db
+  ::set-db
+  (fn [_ [_ new-db]]
+    new-db))
 
-  (reg-event-fx
-   ::set-language
-   (fn [{:keys [:db]} [_ lang]]
-     {:db (assoc db :language lang)
-      :set-cookie ["language" lang]}))
+ (reg-event-fx
+  ::set-language
+  (fn [{:keys [:db]} [_ lang]]
+    {:db (assoc db :language lang)
+     :set-cookie ["language" lang]}))
 
  (re-frame/reg-fx
   :dispatch-multiple
@@ -60,27 +60,27 @@
   (fn [db _]
     (assoc db :mobile-menu-open (not (:mobile-menu-open db)))))
 
-  (reg-event-db
-   ::close-mobile-menu
-   (fn [db _]
-     (assoc db :mobile-menu-open false)))
+ (reg-event-db
+  ::close-mobile-menu
+  (fn [db _]
+    (assoc db :mobile-menu-open false)))
 
-  (reg-event-db
-   ::toggle-language-menu
-   (fn [db _]
-     (assoc db :language-menu-open (not (:language-menu-open db)))))
+ (reg-event-db
+  ::toggle-language-menu
+  (fn [db _]
+    (assoc db :language-menu-open (not (:language-menu-open db)))))
 
-  (reg-event-db
-   ::close-language-menu
-   (fn [db _]
-     (assoc db :language-menu-open false)))
+ (reg-event-db
+  ::close-language-menu
+  (fn [db _]
+    (assoc db :language-menu-open false)))
 
-  (reg-event-db
-   ::close-all-menus
-   (fn [db _]
-     (-> db
-         (assoc :mobile-menu-open false)
-         (assoc :language-menu-open false))))
+ (reg-event-db
+  ::close-all-menus
+  (fn [db _]
+    (-> db
+        (assoc :mobile-menu-open false)
+        (assoc :language-menu-open false))))
 
 ;; readme
  (reg-event-fx

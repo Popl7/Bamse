@@ -1,4 +1,4 @@
-(ns bamse.client
+(ns ^:figwheel-hooks bamse.browser
   (:require [react-dom]
             [reagent.core :as reagent]
             [cljs.reader]
@@ -6,7 +6,6 @@
             [goog.net.cookies]
             [pushy.core :as pushy]
             [bamse.core :as core]
-            [bamse.config :as config]
             [bamse.routes :as routes]))
 
 (enable-console-print!)
@@ -32,7 +31,7 @@
   (re-frame/reg-fx
    :set-cookie
    (fn [[key value]]
-   (set-cookie! key (name value))))
+    (set-cookie! key (name value))))
 )
 
 
@@ -45,11 +44,15 @@
 (def app-dom-element (.getElementById js/document "app"))
 
 (defn render [& [hydrate]]
- (if hydrate
-   (react-dom/hydrate (reagent/as-element [core/app-view])
-                      app-dom-element)
-   (reagent/render    [core/app-view]
-                      app-dom-element)))
+  (if hydrate
+    (do
+      (println "[App] hydrating react")
+      (react-dom/hydrate (reagent/as-element [core/app-view])
+                         app-dom-element))
+    (do
+      (println "[App] rendering react")
+      (reagent/render [core/app-view]
+                      app-dom-element))))
 
 
 (defn start [& [hydrate]]
@@ -65,7 +68,7 @@
   (client-init)
   (render hydrate))
 
-(defn reload []
+(defn ^:after-load reload []
   (js/console.log "[App] Reloading...")
   (re-frame/clear-subscription-cache!)
   (render))

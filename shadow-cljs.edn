@@ -1,59 +1,40 @@
-{ ;; shadow-cljs.edn
-
+{:verbose true
  :log {:level :info}
 
- :source-paths ["resources/gettext"
-                "src"
-                "src-client"
-                "src-devcards"
-                "src-server"]
+ :source-paths ["src/clj" "src/cljs"]
 
- :dependencies [[reagent "0.8.1"]
-                [re-frame "0.10.6"]
-                [binaryage/devtools "0.9.10"]
+ :dependencies [[org.clojure/clojure "1.10.1"]
+                [org.clojure/clojurescript "1.10.520"]
+                [reagent "0.9.0-SNAPSHOT"]
+                [re-frame "0.10.9"]
                 [day8.re-frame/http-fx "0.1.6"]
-                [day8.re-frame/re-frame-10x "0.3.7-react16"]
-                [bidi "2.1.5"]
+                [bidi "2.1.6"]
                 [kibu/pushy "0.3.8"]
                 [com.cemerick/url "0.1.1"]
-                [devcards "0.2.5"] ;; pinned to 0.2.5 to prevent cljsjs.marked error
-                [cider/cider-nrepl "0.21.1"] ;; for VS Code - Calva repl
-                [proto-repl "0.3.1"] ;; for Atom - Proto repl
-                [org.clojars.unrealistic/re-frame-redux "0.1.0-SNAPSHOT"]]
-
- :nrepl {:port 3333}
+                ^:dev [binaryage/devtools "0.9.10"]
+                ^:dev [thheller/shadow-cljs "2.8.52"]
+                ^:dev [org.clojars.unrealistic/re-frame-redux "0.1.0-SNAPSHOT"]]
 
  :dev-http {4200 "resources/public"}
 
  :builds {:client {:target :browser
-                   :main bamse.client/init
-                   :modules {:main {:entries [bamse.client]}}
+                   :main bamse.browser/init
+                   :modules {:main {:entries [bamse.browser]}}
                    :output-dir "resources/public/js"
+                   :output-to "resources/public/js/main.js"
                    :asset-path "/js"
+                   :dev {:devtools {:after-load bamse.client/reload
+                                    :preloads   [devtools.preload]}}
+                   :release {:output-dir "dist/client/js"
+                             :output-to "dist/client/js/main.js"
+                             :compiler-options {:optimizations :advanced}}}
 
-                   :dev {:compiler-options {:closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}}
-                         :devtools {:after-load bamse.client/reload
-                                    :preloads   [devtools.preload
-                                                 ;; day8.re-frame-10x.preload
-                                                 ]}}
-
-                   :release {:compiler-options {:optimizations :advanced}}}
-
-
-            :devcards {:target :browser
-                       :modules {:main {:entries [bamse.devcards]}}
-                       :output-dir "resources/public/js/devcards"
-                       :asset-path "/js/devcards"
-
-                       :dev {:compiler-options {:devcards true}
-                             :devtools {:preloads [devcards.core]}}}
-
-
-             :server {:target :node-script
-                       :main bamse.server/main
-                       :output-to "resources/server/server.js"
-                       :output-dir "resources/server"
-
-                       :dev {:devtools {:after-load bamse.server/restart}}
-
-                       :release {:compiler-options {:optimizations :simple}}}}}
+          :server {:target :node-script
+                   :main bamse.server/main
+                   :output-dir "resources/server"
+                   :output-to "resources/server/server.js"
+                   :asset-path "/server"
+                   :dev {:devtools {:after-load bamse.server/restart}}
+                   :release {:output-dir "dist/server"
+                             :output-to "dist/server/server.js"
+                             :compiler-options {:optimizations :simple}}}}}

@@ -1,0 +1,8 @@
+^{:watch-dirs ["src/cljs"]
+  :css-dirs ["resources/public/css"]
+  :ring-handler bamse.dev-server/handler
+  :ring-server-options {:port 4200}
+  :open-url false}
+{:main bamse.browser
+ :output-dir "resources/public/js"
+ :output-to "resources/public/js/main.js"}

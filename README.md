@@ -1,65 +1,83 @@
 # Bamse
+
 ## Universal Re-frame setup running on Node.js
 
 I added a re-frame frontend and passed the state from the server to the frontend.
 Work in progress :-)
 
 ## Used libraries and features
+
 * [clojurescript](https://clojurescript.org/)
 * [re-frame](https://github.com/Day8/re-frame)
 * [shadow-cljs](https://github.com/thheller/shadow-cljs)
-* [devcards](https://github.com/bhauman/devcards)
 * [bidi](https://github.com/juxt/bidi)
 * [pushy](https://github.com/kibu-australia/pushy)
 * [devtools](https://github.com/binaryage/cljs-devtools)
 * [redux time travelling](https://gitlab.com/StevenT/re-frame-redux)
 
 ## Demo
+
 [https://bamse.ln2.nl](https://bamse.ln2.nl)
 
 ## Development mode
-`npm ci`
 
-`npm run watch`
+```sh
+npm ci
+```
 
-And after compile run:
+### Leiningen
 
-`npm run dev`
+```sh
+lein client
+lein server
+npm run dev
+```
 
-#### App
+### Shadow-cljs
+
+```sh
+npm run watch
+npm run server
+npm run dev
+```
+
+### App
+
+SPA:
+[http://localhost:4200](http://localhost:4200)
+SSR:
 [http://localhost:3000](http://localhost:3000)
 
-#### Devcards
-[http://localhost:3000/devcards.html](http://localhost:3000/devcards.html)
-
-#### Shadow-Cljs dashboard
-[http://localhost:9630](http://localhost:9630)
-
-### Repl
-#### Calva
-Connect to repl on localhost port 3333 and choose target, e.g. client or server
-#### Proto Repl
-Connect to repl on port 3333 and choose target with command
-
-`(shadow.cljs.devtools.api/nrepl-select :client)`
-
-or
-
-`(shadow.cljs.devtools.api/nrepl-select :server)`
-
 ## Production mode
+
+Probably broken....
+
 ### building
-`npm ci`
 
-`npm run release`
+```sh
+npm ci
+```
+
+```sh
+npm run release
+```
+
 ### running
-`cd resources`
 
-`npm ci --only-production`
+```sh
+cd resources
+```
 
-`PORT=4000 node server/server.js`
+```sh
+npm ci --only-production
+```
+
+```sh
+PORT=4000 node server/server.js
+```
 
 [http://localhost:4000](http://localhost:4000)
 
 ## License
-The license is MIT
+
+The license is [MIT](LICENCE)

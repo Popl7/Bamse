@@ -1,4 +1,4 @@
-(ns bamse.server-db
+(ns bamse.server.server-db
   (:require [cljs.nodejs :as node]))
 
 (def sqlite (node/require "sqlite3"))
