@@ -23,6 +23,7 @@ Work in progress :-)
 
 ```sh
 npm ci
+npm run dev
 ```
 
 ### Leiningen
@@ -30,15 +31,18 @@ npm ci
 ```sh
 lein client
 lein server
-npm run dev
 ```
 
 ### Shadow-cljs
 
 ```sh
-npm run watch
-npm run server
 npm run dev
+```
+
+when compilation is done:
+
+```sh
+npm run watch
 ```
 
 ### App

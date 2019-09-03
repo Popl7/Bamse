@@ -18,11 +18,13 @@
 (def colors (nodejs/require "colors/safe"))
 
 (defn renderit [url]
-  (let [db (re-frame/subscribe [::subs/db])]
-    (str "<!DOCTYPE html>"
-         (r/render-to-string[templates/index {:body  core/app-view
-                                              :state @db
-                                              :url   url}]))))
+  (let [db (re-frame/subscribe [::subs/db])
+        status-code (:status-code @db)]
+    {:status-code status-code
+     :result (str "<!DOCTYPE html>"
+                  (r/render-to-string [templates/index {:body  core/app-view
+                                                        :state @db
+                                                        :url   url}]))}))
 
 (defn done-rendering [render-chan]
   (let [waits  (re-frame/subscribe [::subs/ssr-waits])
@@ -38,7 +40,6 @@
 
 (defn ^:export render-page [ch url path lang]
   (println "------- new request ------------------")
-  ; (core/init {:path path :lang lang})
   (core/init)
   (init-server)
   (re-frame/dispatch-sync [::events/set-language lang])

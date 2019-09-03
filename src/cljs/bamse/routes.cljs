@@ -35,6 +35,7 @@
       :user-edit  (do
                    (re-frame/dispatch [::users/get-user (js/parseInt user-id)]))
       :not-found (do
+                   (re-frame/dispatch [:set-status-code 404])
                    (re-frame/dispatch [:set-title (name panel-name)]))
       "")
     (re-frame/dispatch [:set-active-route matched-route])))

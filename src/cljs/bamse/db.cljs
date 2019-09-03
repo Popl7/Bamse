@@ -7,6 +7,7 @@
    :language         :en
    :mobile-menu-open false
    :language-menu-open false
+   :status-code      200
    :ssr-waits     (set '())
    :readme           {:http-status :empty}
    :url              {:http-status :empty}
@@ -18,11 +19,14 @@
 (s/def ::db (s/keys :req-un [::title
                              ::active-route
                              ::mobile-menu-open
+                             ::status-code
                              ::ssr-waits
                              ::url
                              ::poe
                              ::user
                              ::users]))
+
+(s/def ::status-code #{200 401 404 500})
 
 (s/def ::http-status #{:empty
                        :loading

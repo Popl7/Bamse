@@ -22,6 +22,11 @@
   (fn [_ [_ new-db]]
     new-db))
 
+ (reg-event-db
+  :set-status-code
+  (fn [db [_ code]]
+    (assoc db :status-code code)))
+
  (reg-event-fx
   ::set-language
   (fn [{:keys [:db]} [_ lang]]

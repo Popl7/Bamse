@@ -1,6 +1,7 @@
 (ns ^:figwheel-hooks bamse.server
   (:require [cljs.nodejs :as nodejs]
             [bamse.config :as config]
+            [bamse.routes :as routes]
             [bamse.server.render :as render]
             [bamse.server.user-routes :as user-routes]
             [bamse.server.test-routes :as test-routes]
@@ -23,14 +24,17 @@
   (let [ch (chan)
         full-url (str req.protocol "://" req.headers.host req.originalUrl)
         lang (or (-> req
-                     (.-cookies)
-                     (js->clj :keywordize-keys true)
-                     :language
-                     keyword)
+                   (.-cookies)
+                   (js->clj :keywordize-keys true)
+                   :language
+                   keyword)
                  :nl)
         render-chan (render/render-page ch full-url (.-path req) lang)]
     (go
-      (.send res (<! render-chan)))))
+     (let [rendered-page (<! render-chan)]
+       (-> res
+         (.status (:status-code rendered-page))
+         (.send (:result rendered-page)))))))
 
 (defn start-server []
  (let [app  (express)
@@ -60,8 +64,8 @@
                          :delay 200})))
   ;; add routes
   (.get app "/" handle-request)
-  (.use app (serve-static "resources/public"))
-  (.use app (serve-static "client"))
+  (.use app (serve-static "resources/public")) ;; development
+  (.use app (serve-static "client")) ;; production
   (.use app (user-routes/routes))
   (.use app (test-routes/routes))
   (.get app "*" handle-request)
