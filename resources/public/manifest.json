@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Bamse - Universal Re-frame setup running on Node.js",
+    "short_name": "bamse",
     "start_url": "/",
     "icons": [
         {
