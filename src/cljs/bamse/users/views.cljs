@@ -160,7 +160,7 @@
                                   [spinner]
                                   (if @user
                                     [user-detail @user]
-                                    [:div (tr "No user")]))
+                                    [:div (tr "User not found!")]))
                                 (when config/debug?
                                  [:div
                                   [:button.btn.btn-secondary {:type     :button
@@ -188,4 +188,4 @@
                                    [spinner]
                                    (if @user
                                      [user-edit-form (r/atom @user)]
-                                     [:div (tr "No user")]))])})))
+                                     [:div (tr "User not found!")]))])})))

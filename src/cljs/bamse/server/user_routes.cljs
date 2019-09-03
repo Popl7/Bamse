@@ -22,17 +22,24 @@
 (defn api-user [req res]
   (db/user req.params.id
            (fn [err row]
-             (if err
-               (do
-                 (println "user api - 500 " err)
-                 (-> res
-                     (.status 500)
-                     (.send (clj->js err.message))))
-               (do
-                 (println "user api - 200")
-                 (-> res
-                     (.status 200)
-                     (.send (clj->js {:user row}))))))))
+             (println "row" row)
+             (cond
+               err (do
+                    (println "user api - 500 " err)
+                    (-> res
+                        (.status 500)
+                        (.send (clj->js err.message))))
+               row (do
+                    (println "user api - 200")
+                    (-> res
+                        (.status 200)
+                        (.send (clj->js {:user row}))))
+               :else (do
+                       (println "user api - 404")
+                       (-> res
+                           (.status 404)
+                           (.send "User not found")))))))
+
 
 (defn add-user [req res]
 ;; validate and save or 500 error

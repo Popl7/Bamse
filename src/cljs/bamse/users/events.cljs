@@ -16,8 +16,9 @@
   ::get-users-failure
   (fn [{:keys [:db]} [_ res]]
     (println "BAD" (:status-text res))
-    {:db (assoc db :users {:http-status :error
-                           :http-error "error"})}))
+    {:db (-> db
+             (assoc :users {:http-status :error
+                            :http-error "error"}))}))
 
  (reg-event-fx
   ::reget-users
@@ -50,8 +51,9 @@
   ::add-user-failure
   (fn [{:keys [:db]} [_ res]]
     (println "BAD" (:status-text res))
-    {:db (assoc db :add-user {:http-status :error
-                              :http-error  "error"})}))
+    {:db (-> db
+             (assoc :add-user {:http-status :error
+                               :http-error  "error"}))}))
  (reg-event-fx
   ::add-user
   (fn [{:keys [:db]} [_ user]]
@@ -134,8 +136,10 @@
   ::get-user-failure
   (fn [{:keys [:db]} [_ res]]
     (println "BAD" (:status-text res))
-    {:db (assoc-in db [:user :item] {:http-status :error
-                                     :http-error "error"})}))
+    {:db (-> db
+           (assoc :status-code 404)
+           (assoc-in [:user :item] {:http-status :error
+                                    :http-error "error"}))}))
 
  (reg-event-db
   ::reset-user
