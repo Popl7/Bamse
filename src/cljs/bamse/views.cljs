@@ -44,8 +44,6 @@
        [:a.nav-link {:href (url-for :about)} (tr "About")]]
       [:li.nav-item {:class (when (= panel :users) "active")}
        [:a.nav-link {:href (url-for :users)} (tr "Users")]]
-      [:li.nav-item {:class (when (= panel :not-found) "active")}
-       [:a.nav-link {:href "/fake"} (tr "Not found")]]
       [language-chooser lang language-menu-open]]]]])
 
 (defn not-found-page []
