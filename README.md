@@ -84,4 +84,4 @@ PORT=4000 node server/server.js
 
 ## License
 
-The license is [MIT](LICENCE)
+The license is MIT
