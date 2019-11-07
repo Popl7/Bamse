@@ -21,7 +21,7 @@
 (def server?
   (not client?))
 
-(def ajax-timeout 1000)
+(def ajax-timeout 2000)
 
 (def api-server
   (if client?
@@ -38,4 +38,3 @@
 (def dictionary
   {:nl (edn/read-string (rc/inline "nl.edn"))
    :fr (edn/read-string (rc/inline "fr.edn"))})
-
