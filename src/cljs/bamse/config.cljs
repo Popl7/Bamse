@@ -21,7 +21,7 @@
 (def client?
   (not server?))
 
-(def ajax-timeout 1000)
+(def ajax-timeout 2000)
 
 (def api-server
   (if client?
