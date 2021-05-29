@@ -52,6 +52,6 @@
     "node-sass": "^4.11.0",
     "shadow-cljs": "^2.8.52",
     "source-map-support": "^0.5.10",
-    "ws": "^6.2.1"
+    "ws": "^7.4.6"
   }
 }
