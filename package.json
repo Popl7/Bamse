@@ -37,7 +37,7 @@
     "cors": "^2.8.5",
     "create-react-class": "^15.6.3",
     "express": "^4.16.4",
-    "markdown-it": "^8.4.2",
+    "markdown-it": "^12.3.2",
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "react-flip-move": "^3.0.3",
